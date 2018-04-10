@@ -14,11 +14,22 @@
 
 <script>
 $(function() {
-
+$('#switch1').click(function() {
+				  var msg= "";
+				  if($('#phyName').val() == "")msg = msg+"Please enter Physician name.\n";
+				  if($('#loc').val() == "")msg = msg+ "Please enter location for your appointment\n";
+				  if($('#time').val() == "") msg= msg+"Please choose date and time for your appointment.\n";
+				  if(msg != ""){
+					alert(msg)
+				  }else{
+					  sendObject();
+                  }
+});
+				  
 function sendObject(){
 	
 	$.ajax({
-		type : 'GET',
+		type : 'POST',
 		url : loginURL,
 		contentType : 'application/json',
 		data : JSON.stringify(tmp),
@@ -26,7 +37,6 @@ function sendObject(){
 			
 		},
 		error : function(err) {
-			alert("Please enter Valid credentials.")
 			console.log("Error: "+err)
 		}
 	})
